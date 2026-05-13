@@ -62,11 +62,7 @@ In this stage, trial-level offline evaluation is performed. One feature vector i
 
 Run: ` run_offline_pipeline.py `
 
-### Feature Extraction
-- Common Spatial Pattern (CSP)
-
-### Classification
-- Binary (Left vs Right motor imagery)
+Common Spatial Pattern (CSP) is used for Feature Extraction.
 
 ### Artefact Impact
 
