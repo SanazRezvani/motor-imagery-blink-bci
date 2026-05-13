@@ -14,14 +14,14 @@ The dataset is available online [here](https://www.synapse.org/Synapse:syn640052
 
 ## Dataset Background
 
-The dataset used in this project was originally designed to study the **physiology of eye blinks and their effect on EEG signals**. 
+The dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
 
 During data acquisition, multiple modalities were recorded simultaneously, including:
 - EEG (brain activity)
 - Eye movements (EOG)
 - Eyelid motion (EMG-based blink signals)
 
-This multimodal setup enables analysis of how **blink-related artefacts influence EEG recordings**.
+This multimodal setup enables analysis of how blink-related artefacts influence EEG recordings.
 
 ---
 
@@ -44,6 +44,61 @@ Key questions explored:
 - Latency benchmarking
 - Blink artefact impact analysis
 
+## Design Choices
+
+- **Decoded Channels**: Based on the original paper, the following electrodes are excluded from analysis, as they were identified as either malfunctioning or exhibiting bridging effects: PO3, F1, POZ, OZ, F3, O2, P8, PO7, FC3, P7, and P4
+---
+
+## Offline Pipeline Overview
+In this stage, trial-level offline evaluation is performed. One feature vector is extracted per MI trial.
+
+### 1. Load EEG motor imagery data
+
+- Download the dataset from [here](https://www.synapse.org/Synapse:syn64005218/wiki/630018)
+
+- Start by loading motor imagery-based EEG recording of one of the subjects. `S01/Sess01/Neuroscan/MI011.csv ` is chosen here.
+
+- Run: ` run_offline_pipeline.py `
+
+### Feature Extraction
+- Common Spatial Pattern (CSP)
+
+### Classification
+- Window-level classification
+- Binary (Left vs Right motor imagery)
+
+### Artefact Impact
+
+| Dataset        | Accuracy |
+|---------------|--------|
+| All epochs    | 83.3% |
+| Clean epochs  | 87.5% |
+
+### EEG + HEO + Blink Timeline
+- Dual-axis plot showing:
+  - EEG (C3)
+  - Eye movement (HEO)
+  - Blink markers
+  - Motor imagery cues
+ ![Dual-axis plot](results/eeg_heo_blink_cue_timeline_dual_axis.png)
+
+
+
+
+### Real-Time Simulation
+- Sliding window:
+  - Window size: 1.0 s
+  - Step size: 0.25 s
+
+---
+
+## Key Observations
+
+- Blink artefacts strongly affect EEG decoding
+- CSP improves spatial discrimination significantly
+- Real-time predictions show temporal instability without smoothing
+- Trade-off exists between stability and latency
+
 ---
 
 ## Results
@@ -63,26 +118,13 @@ Key questions explored:
 
 ---
 
-### Artefact Impact
 
-| Dataset        | Accuracy |
-|---------------|--------|
-| All epochs    | 41.7% |
-| Clean epochs  | 62.5% |
-
-Eye blinks significantly degrade classification performance.
 
 ---
 
 ## Visualisations
 
-### EEG + HEO + Blink Timeline
-- Dual-axis plot showing:
-  - EEG (C3)
-  - Eye movement (HEO)
-  - Blink markers
-  - Motor imagery cues
- ![Dual-axis plot](results/eeg_heo_blink_cue_timeline_dual_axis.png)
+
 
 ### Real-Time Predictions
 - Sliding-window predictions vs ground truth
@@ -92,41 +134,3 @@ Eye blinks significantly degrade classification performance.
 - Processing time per window (sub-millisecond performance)
  ![latency_over_time](results/latency_over_time.png)
 
----
-
-## Pipeline Overview
-Raw CSV → MNE Raw → Bandpass Filter (8–30 Hz) → Epoching → Sliding Windows → CSP → Classifier → Real-Time Simulation
-
-
----
-
-## Methodology
-
-### Feature Extraction
-- Common Spatial Pattern (CSP)
-- Multi-channel EEG (full montage)
-
-### Classification
-- Window-level classification
-- Binary (Left vs Right motor imagery)
-
-### Real-Time Simulation
-- Sliding window:
-  - Window size: 1.0 s
-  - Step size: 0.25 s
-
----
-
-## Key Observations
-
-- Blink artefacts strongly affect EEG decoding
-- CSP improves spatial discrimination significantly
-- Real-time predictions show temporal instability without smoothing
-- Trade-off exists between stability and latency
-
----
-
-## How to Run
-
-```bash
-python run_realtime_simulation.py
