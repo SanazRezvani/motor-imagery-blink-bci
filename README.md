@@ -1,12 +1,38 @@
-# Multimodal BCI: Real-Time Motor Imagery Decoding with EEG & Blink Analysis
+# Multimodal BCI: Real-Time Motor Imagery Decoding with EEG & Blink Analysis (Python)
 
-This project implements a **real-time Brain-Computer Interface (BCI) pipeline** using EEG data, integrating:
-
+This project implements a **real-time Brain-Computer Interface (BCI) pipeline** using EEG data to classify motor imagery EEG signals (kinesthetic motor imagery by imagining grasping with either their left or right hand, involving all fingers), integrating:
 - Motor Imagery (MI) decoding
 - Eye-blink (EOG) artefact analysis
 - CSP-based feature extraction
 - Sliding-window real-time simulation
 
+This work is based on the following dataset:
+
+[Guttmann-Flury, E., Sheng, X. & Zhu, X. Dataset combining EEG, eye-tracking, and high-speed video for ocular activity analysis across BCI paradigms. Sci Data 12, 587 (2025).](https://arxiv.org/pdf/2506.07488)
+
+The dataset is available online [here](https://www.synapse.org/Synapse:syn64005218/wiki/630018)
+
+## Dataset Background
+
+The dataset used in this project was originally designed to study the **physiology of eye blinks and their effect on EEG signals**. 
+
+During data acquisition, multiple modalities were recorded simultaneously, including:
+- EEG (brain activity)
+- Eye movements (EOG)
+- Eyelid motion (EMG-based blink signals)
+
+This multimodal setup enables analysis of how **blink-related artefacts influence EEG recordings**.
+
+---
+
+## How This Project Uses the Dataset?
+
+While the original study focuses on modelling blink physiology, this project takes a different perspective; It investigates how blink artefacts affect **motor imagery (MI) classification in BCI systems**
+
+Key questions explored:
+- How much do blinks degrade classification accuracy?
+- Can removing blink-contaminated epochs improve performance?
+- How does this impact real-time decoding?
 ---
 
 ## Key Features
