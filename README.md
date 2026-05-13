@@ -14,7 +14,7 @@ The dataset is available online [here](https://www.synapse.org/Synapse:syn640052
 
 ## Dataset Background
 
-The dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
+According to the above pape, the dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
 
 During data acquisition, multiple modalities were recorded simultaneously, including:
 - EEG (brain activity)
@@ -49,22 +49,21 @@ Key questions explored:
 - **Decoded Channels**: Based on the original paper, the following electrodes are excluded from analysis, as they were identified as either malfunctioning or exhibiting bridging effects: PO3, F1, POZ, OZ, F3, O2, P8, PO7, FC3, P7, and P4
 ---
 
-## Offline Pipeline Overview
-In this stage, trial-level offline evaluation is performed. One feature vector is extracted per MI trial.
-
-### 1. Load EEG motor imagery data
+## Load EEG motor imagery data
 
 - Download the dataset from [here](https://www.synapse.org/Synapse:syn64005218/wiki/630018)
 
 - Start by loading motor imagery-based EEG recording of one of the subjects. `S01/Sess01/Neuroscan/MI011.csv ` is chosen here.
 
-- Run: ` run_offline_pipeline.py `
+## Offline Pipeline Overview
+In this stage, trial-level offline evaluation is performed. One feature vector is extracted per MI trial.
+
+Run: ` run_offline_pipeline.py `
 
 ### Feature Extraction
 - Common Spatial Pattern (CSP)
 
 ### Classification
-- Window-level classification
 - Binary (Left vs Right motor imagery)
 
 ### Artefact Impact
@@ -83,7 +82,11 @@ In this stage, trial-level offline evaluation is performed. One feature vector i
  ![Dual-axis plot](results/eeg_heo_blink_cue_timeline_dual_axis.png)
 
 
+## Real-Time Pipeline Overview
 
+In this stage, window-level real-time simulation is performed. Each trial is divided into overlapping 1-second windows.
+
+Run: ` run_realtime_simulation.py `
 
 ### Real-Time Simulation
 - Sliding window:
