@@ -6,13 +6,13 @@ This project implements a **real-time Brain-Computer Interface (BCI) pipeline** 
 - CSP-based feature extraction
 - Sliding-window real-time simulation
 
+## Dataset Background
+
 This work is based on the following dataset:
 
 [Guttmann-Flury, E., Sheng, X. & Zhu, X. Dataset combining EEG, eye-tracking, and high-speed video for ocular activity analysis across BCI paradigms. Sci Data 12, 587 (2025).](https://arxiv.org/pdf/2506.07488)
 
 The dataset is available online [here](https://www.synapse.org/Synapse:syn64005218/wiki/630018)
-
-## Dataset Background
 
 According to the above pape, the dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
 
@@ -22,8 +22,6 @@ During data acquisition, multiple modalities were recorded simultaneously, inclu
 - Eyelid motion (EMG-based blink signals)
 
 This multimodal setup enables analysis of how blink-related artefacts influence EEG recordings.
-
----
 
 ## How This Project Uses the Dataset?
 
@@ -43,10 +41,13 @@ Key questions explored:
 - Common Spatial Pattern (CSP) feature extraction
 - Latency benchmarking
 - Blink artefact impact analysis
-
+  
+---
 ## Design Choices
 
 - **Decoded Channels**: Based on the original paper, the following electrodes are excluded from analysis, as they were identified as either malfunctioning or exhibiting bridging effects: PO3, F1, POZ, OZ, F3, O2, P8, PO7, FC3, P7, and P4
+- In the real-time stage, a sliding window with a window size of 1.0 s and a step size of 0.25 s is chosen  
+
 ---
 
 ## Load EEG motor imagery data
@@ -89,22 +90,8 @@ In this stage, window-level real-time simulation is performed. Each trial is div
 Run: ` run_realtime_simulation.py `
 
 ### Real-Time Simulation
-- Sliding window:
-  - Window size: 1.0 s
-  - Step size: 0.25 s
 
----
 
-## Key Observations
-
-- Blink artefacts strongly affect EEG decoding
-- CSP improves spatial discrimination significantly
-- Real-time predictions show temporal instability without smoothing
-- Trade-off exists between stability and latency
-
----
-
-## Results
 
 ### Offline Performance
 - CSP Accuracy: **73.7%**
@@ -113,21 +100,6 @@ Run: ` run_realtime_simulation.py `
 ---
 
 ### Real-Time Simulation
-- Accuracy: **75.4%**
-- Mean latency: **0.33 ms**
-- Max latency: **2.34 ms**
-
-✔️ Demonstrates real-time feasibility
-
----
-
-
-
----
-
-## Visualisations
-
-
 
 ### Real-Time Predictions
 - Sliding-window predictions vs ground truth
@@ -137,3 +109,8 @@ Run: ` run_realtime_simulation.py `
 - Processing time per window (sub-millisecond performance)
  ![latency_over_time](results/latency_over_time.png)
 
+- Accuracy: **75.4%**
+- Mean latency: **0.33 ms**
+- Max latency: **2.34 ms**
+
+This demonstrates real-time feasibility
