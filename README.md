@@ -1,4 +1,4 @@
-# Multimodal BCI: Real-Time Motor Imagery Decoding with EEG & Blink Analysis (Python)
+# Real-Time Motor Imagery Decoding with EEG & Blink Analysis (Python)
 
 This project implements a **real-time Brain-Computer Interface (BCI) pipeline** using EEG data to classify motor imagery EEG signals (kinesthetic motor imagery by imagining grasping with either their left or right hand, involving all fingers), integrating:
 - Motor Imagery (MI) decoding
@@ -14,7 +14,7 @@ This work is based on the following dataset:
 
 The dataset is available online [here](https://www.synapse.org/Synapse:syn64005218/wiki/630018)
 
-According to the above pape, the dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
+According to the above paper, the dataset used in this project was originally designed to study the physiology of eye blinks and their effect on EEG signals. 
 
 During data acquisition, multiple modalities were recorded simultaneously, including:
 - EEG (brain activity)
@@ -31,6 +31,7 @@ Key questions explored:
 - How much do blinks degrade classification accuracy?
 - Can removing blink-contaminated epochs improve performance?
 - How does this impact real-time decoding?
+
 ---
 
 ## Key Features
@@ -46,7 +47,7 @@ Key questions explored:
 ## Design Choices
 
 - **Decoded Channels**: Based on the original paper, the following electrodes are excluded from analysis, as they were identified as either malfunctioning or exhibiting bridging effects: PO3, F1, POZ, OZ, F3, O2, P8, PO7, FC3, P7, and P4
-- In the real-time stage, a sliding window with a window size of 1.0 s and a step size of 0.25 s is chosen  
+- **Sliding Window**: In the real-time stage, a sliding window with a window size of 1.0 s and a step size of 0.25 s is chosen  
 
 ---
 
@@ -91,26 +92,22 @@ Run: ` run_realtime_simulation.py `
 
 ### Real-Time Simulation
 
+The real-time simulation achieved:
 
+- Offline CSP accuracy: **73.7%**
+- Real-time sliding-window accuracy: **75.4%**
+- Mean latency: **0.334 ms**
 
-### Offline Performance
-- CSP Accuracy: **73.7%**
-- Balanced precision/recall across classes
-
----
-
-### Real-Time Simulation
+The similarity between offline and simulated real-time performance suggests that the CSP-based pipeline generalises well to streaming EEG scenarios.
 
 ### Real-Time Predictions
 - Sliding-window predictions vs ground truth
  ![realtime_predictions](results/realtime_predictions.png)
 
 ### Latency Analysis
-- Processing time per window (sub-millisecond performance)
+
+## Latency Analysis
+
+The processing latency remained below a few milliseconds across sliding windows. This demonstrates that the decoding pipeline is lightweight enough for near real-time inference, which is important for interactive BCI systems where responsiveness directly affects usability and user experience.
  ![latency_over_time](results/latency_over_time.png)
 
-- Accuracy: **75.4%**
-- Mean latency: **0.33 ms**
-- Max latency: **2.34 ms**
-
-This demonstrates real-time feasibility
