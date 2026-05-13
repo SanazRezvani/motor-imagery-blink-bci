@@ -1,4 +1,4 @@
-# 🧠 Multimodal BCI: Real-Time Motor Imagery Decoding with EEG & Blink Analysis
+# Multimodal BCI: Real-Time Motor Imagery Decoding with EEG & Blink Analysis
 
 This project implements a **real-time Brain-Computer Interface (BCI) pipeline** using EEG data, integrating:
 
@@ -9,26 +9,26 @@ This project implements a **real-time Brain-Computer Interface (BCI) pipeline** 
 
 ---
 
-## 📌 Key Features
+## Key Features
 
-- 📡 EEG + EOG multimodal processing
-- 🧠 Motor imagery classification (Left vs Right)
-- ⚡ Real-time sliding window decoding
-- 🎯 Common Spatial Pattern (CSP) feature extraction
-- ⏱️ Latency benchmarking
-- 👁️ Blink artefact impact analysis
+- EEG + EOG multimodal processing
+- Motor imagery classification (Left vs Right)
+- Real-time sliding window decoding
+- Common Spatial Pattern (CSP) feature extraction
+- Latency benchmarking
+- Blink artefact impact analysis
 
 ---
 
-## 📊 Results
+## Results
 
-### 🔹 Offline Performance
+### Offline Performance
 - CSP Accuracy: **73.7%**
 - Balanced precision/recall across classes
 
 ---
 
-### 🔹 Real-Time Simulation
+### Real-Time Simulation
 - Accuracy: **75.4%**
 - Mean latency: **0.33 ms**
 - Max latency: **2.34 ms**
@@ -37,18 +37,18 @@ This project implements a **real-time Brain-Computer Interface (BCI) pipeline** 
 
 ---
 
-### 🔹 Artefact Impact (Key Insight)
+### Artefact Impact
 
 | Dataset        | Accuracy |
 |---------------|--------|
 | All epochs    | 41.7% |
 | Clean epochs  | 62.5% |
 
-👉 Eye blinks significantly degrade classification performance.
+Eye blinks significantly degrade classification performance.
 
 ---
 
-## 📈 Visualisations
+## Visualisations
 
 ### EEG + HEO + Blink Timeline
 - Dual-axis plot showing:
@@ -56,12 +56,15 @@ This project implements a **real-time Brain-Computer Interface (BCI) pipeline** 
   - Eye movement (HEO)
   - Blink markers
   - Motor imagery cues
+ ![Dual-axis plot](results/eeg_heo_blink_cue_timeline_dual_axis.png)
 
 ### Real-Time Predictions
 - Sliding-window predictions vs ground truth
+ ![realtime_predictions](results/realtime_predictions.png)
 
 ### Latency Analysis
 - Processing time per window (sub-millisecond performance)
+ ![latency_over_time](results/latency_over_time.png)
 
 ---
 
