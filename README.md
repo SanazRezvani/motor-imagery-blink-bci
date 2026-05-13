@@ -69,3 +69,38 @@ Eye blinks significantly degrade classification performance.
 ---
 
 ## 🏗️ Pipeline Overview
+Raw CSV → MNE Raw → Bandpass Filter (8–30 Hz) → Epoching → Sliding Windows → CSP → Classifier → Real-Time Simulation
+
+
+---
+
+## 🧪 Methodology
+
+### Feature Extraction
+- Common Spatial Pattern (CSP)
+- Multi-channel EEG (full montage)
+
+### Classification
+- Window-level classification
+- Binary (Left vs Right motor imagery)
+
+### Real-Time Simulation
+- Sliding window:
+  - Window size: 1.0 s
+  - Step size: 0.25 s
+
+---
+
+## Key Observations
+
+- Blink artefacts strongly affect EEG decoding
+- CSP improves spatial discrimination significantly
+- Real-time predictions show temporal instability without smoothing
+- Trade-off exists between stability and latency
+
+---
+
+## 🚀 How to Run
+
+```bash
+python run_realtime_simulation.py
