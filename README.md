@@ -68,13 +68,13 @@ Eye blinks significantly degrade classification performance.
 
 ---
 
-## 🏗️ Pipeline Overview
+## Pipeline Overview
 Raw CSV → MNE Raw → Bandpass Filter (8–30 Hz) → Epoching → Sliding Windows → CSP → Classifier → Real-Time Simulation
 
 
 ---
 
-## 🧪 Methodology
+## Methodology
 
 ### Feature Extraction
 - Common Spatial Pattern (CSP)
@@ -100,7 +100,7 @@ Raw CSV → MNE Raw → Bandpass Filter (8–30 Hz) → Epoching → Sliding Win
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ```bash
 python run_realtime_simulation.py
